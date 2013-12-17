@@ -8,11 +8,29 @@ Created on 2013年12月15日
 
 @summary: Split text to sentences
 
+@version: 1.1
+
+@summary: 修改bug, （1）增加一行 entity = file.readline()
+                            由于第一行为entity，按nltk分段的情况会导致第一行不会被分为一行
+                          因此，先用file.readline()读取第一行，再把其他的行一起读取file.read()
+        (2)改为for i in range(0, article_sentence_num)。将1改为0，原因同上 
+
+example:
+import nltk.data
+sent_detector = nltk.data.load('tokenizers/punkt/english.pickle')
+test_file = open("D:\\xubo\\ENwiki\\data3\\10.txt", 'r')
+write_file = open("D:\\xubo\\ENwiki\\data3\\20.txt", 'w')
+test_content = test_file.read()
+sentences = sent_detector.tokenize(test_content.strip())
+for sentence in sentences:
+    write_file.write(sentence + "\n")
 '''
+import nltk.data
 import os
-ARTICLE_MENU = "D:\\xubo\\ENwiki\\data\\"
-NEW_ARTICLE_MENU = "D:\\xubo\\ENwiki\\newdata\\"
-ARTICLE_ID_PATH = "D:\\xubo\\ENwiki\\article_id"
+sent_detector = nltk.data.load('tokenizers/punkt/english.pickle')
+ARTICLE_MENU = "D:\\xubo\\ENwiki\\data3\\"
+NEW_ARTICLE_MENU = "D:\\xubo\\ENwiki\\newdata3\\"
+ARTICLE_ID_PATH = "D:\\xubo\\ENwiki\\article_id3"
 if not os.path.exists(NEW_ARTICLE_MENU):
     os.makedirs(NEW_ARTICLE_MENU)
 article_id_file = open(ARTICLE_ID_PATH, 'w')
@@ -23,22 +41,13 @@ for article in article_list:
     if count%1000 == 0:
         print count
     article_file = open(ARTICLE_MENU + article, 'r')
-    article_lines = article_file.readlines()
-    article_sentences = list()
-    for line in article_lines:
-        line = line.strip()
-        words = line.split(".")
-        for word in words:
-#             print word
-            word = word.lstrip()
-#             print word
-            article_sentences.append(word)
-    article_file.close()
+    entity = article_file.readline().rstrip()
+    article_content = "".join(article_file.readlines())
+    article_sentences = sent_detector.tokenize(article_content.strip())
     article_sentence_num = len(article_sentences)
     if article_sentence_num > 1:
-        entity = article_sentences[0]
         article_sentence_file = open(NEW_ARTICLE_MENU + article, 'w')
-        for i in range(1,article_sentence_num):
+        for i in range(0, article_sentence_num):
             article_sentence_file.write(article_sentences[i] + "\n")
         article_sentence_file.close()
         article_id_file.write("%s\t%s\n" %(entity, article))
