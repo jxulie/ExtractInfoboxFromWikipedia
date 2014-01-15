@@ -44,5 +44,5 @@ Created on 2013年12月26日
 #         
 
 
-test_file = open("D://xubo//ENwiki//newdata//999975.txt", 'r')
+test_file = open("D://xubo//ENwiki//newdata//999976.txt", 'r')
 print test_file.read()
