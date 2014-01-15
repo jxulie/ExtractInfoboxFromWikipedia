@@ -10,7 +10,7 @@ Created on 2013年12月16日
 
 '''
 entity_set = set()
-sample_category_file = open("D://xubo//ENwiki//sample_category_final.txt", 'r')
+sample_category_file = open("D://xubo//ENwiki//sample_category_produced.txt", 'r')
 category_lines = sample_category_file.readlines()
 for line in category_lines:
     try:
@@ -21,8 +21,9 @@ for line in category_lines:
     except:
         print line
 sample_category_file.close()
-sample_infobox_file = open("D://xubo//ENwiki//sample_infobox_final.txt", 'w')
-infobox_file = open("D://xubo//ENwiki//infobox_final.txt", 'r')
+sample_infobox_file = open("D://xubo//ENwiki//sample_infobox_produced.txt", 'w')
+# infobox_file = open("D://xubo//ENwiki//infobox_final.txt", 'r')
+infobox_file = open("D://xubo//ENwiki//new_infobox.txt", 'r')
 infobox_lines = infobox_file.readlines()
 for line in infobox_lines:
     try:

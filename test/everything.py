@@ -9,78 +9,218 @@ Created on 2013年12月15日
 @summary: Test everything
 
 '''
+# import re
+# refile = open("D://xubo//ENwiki//test//refine.txt", 'w')
+# infofile = open("D://xubo//ENwiki//sample_infobox_final2.txt", 'r')
+# infolines = infofile.readlines()
+# for line in infolines:
+#     value_list = list()
+#     line = line.rstrip()
+#     words = line.split("\t")
+# #     re.sub(r"hello (\w+), nihao \1", "crifanli", inputStr);
+#     words[2] = re.sub(r"\(\s+\)", "", words[2])
+#     tokens = words[2].replace("jxulie", "\t").replace("[[", "\t").replace("]]", "\t")
+#     values = tokens.split("\t")
+#     for value in values:
+#         value = value.strip()
+#         if value != "":
+#             if value.find("|") != -1:
+#                 value = value[value.find("|")+1:]
+#             if value != "" and value.find("''")== -1 and value.find("(")== -1:
+#                 value_list.append(value)
+#     if len(value_list) > 0:
+#         refile.write("%s\t%s\t%s\n" %(words[0],words[1],"|".join(value_list)))
+# refile.close()
+     
 
-# test strip() function
-# aaa = " After a few years in the 2nd highest division, they won the qualifying tournament for the 2012-13 season "
+
+# aaa = "bruce lee [[john saxon (actor)|john saxon]] [[jim kelly (martial artist)|jim kelly]] paul green {{small|(uncredited)}} [[ahna capri]] [[shih kien]] [[robert wall]] carl lerner [[gerda lerner]] "
+# aaa = re.sub(r"\{\{[\s\S]+\}\}", "", aaa)
+# aaa = re.sub(r"\([\s\S]+\)", "", aaa)
+# bbb = aaa.replace("jxulie", "\t").replace("[[", "\t").replace("]]", "\t")
+# ccc = bbb.split("\t")
+# for c in ccc:
+#     c = c.strip()
+# #     c = re.sub(r"\{\{[\s\S]+\}\}", "", c)
+# #     c = re.sub(r"\([\s\S]+\)", "", c)
+#     if c != "":
+#         if c.find("|") != -1:
+#             c = c[c.find("|")+1:]
+#         print c
+
+# aaa = ", ,aab}}"
+# aaa= aaa.strip(" ,}")
 # print aaa
-# print aaa.lstrip()
-# print aaa.rstrip()
-# print aaa.strip()
 
-# test file
-# NEW_ARTICLE_MENU = "D:\\xubo\\ENwiki\\newdata2\\"
-# test_file = open(NEW_ARTICLE_MENU + "1000.txt", 'r')
-# test_lines = test_file.readlines()
-# print len(test_lines)
-# for line in test_lines:
-#     print line.rstrip()
-# 
-# import nltk.data
-# sent_detector = nltk.data.load('tokenizers/punkt/english.pickle')
-# test_file = open("D:\\xubo\\ENwiki\\data3\\10.txt", 'r')
-# write_file = open("D:\\xubo\\ENwiki\\data3\\20.txt", 'w')
-# test_content = test_file.read()
-# sentences = sent_detector.tokenize(test_content.strip())
-# for sentence in sentences:
-#     write_file.write(sentence + "\n")
-# # print '\n-----\n'.join(sent_detector.tokenize(test_content.strip()))
-# write_file.close()
-# test_file.close()
-# # import nltk
-# nltk.download()
+# aaa = "because you're mine    103 minutes"
+# bbb = "some one long two 10"
+# print bbb
+# ccc = bbb.split(" ")
+# print ccc
+# if any(word in aaa for word in ccc):
+#     print "right"
 
+# from nltk.corpus import names
 # import nltk
-# sample_sentence = "united states. australia, Mr. xu said he loves me"
-# # sentences = nltk.sent_tokenize(rawtext) # NLTK default sentence segmenter
-# sentences = nltk.sent_tokenize(sample_sentence)
-# print sentences
-# sentences = [nltk.word_tokenize(sent) for sent in sentences] # NLTK word tokenizer
-# tokens = nltk.word_tokenize(sample_sentence)
-# print tokens
-# sentences = [nltk.pos_tag(sent) for sent in sentences] # NLTK POS tagger
-# tags = nltk.pos_tag(tokens)
-# print tags
+# import random
+# def gender_features(word):
+#     return {'last_letter': word[-1]}
+#   
+#      
+# def gender_features2(name):
+#     features = {}
+#     features["firstletter"] = name[0].lower()
+#     features["lastletter"] = name[-1].lower()
+#     for letter in 'abcdefghijklmnopqrstuvwxyz':
+#         features["count(%s)" % letter] = name.lower().count(letter)
+#         features["has(%s)" % letter] = (letter in name.lower())
+#     return features
+#   
+# names = ([(name, 'male') for name in names.words('male.txt')] +
+#             [(name, 'female') for name in names.words('female.txt')])
+#   
+# print names[0]
+# # print random.shuffle(names)
+# featuresets = [(gender_features2(n), g) for (n,g) in names]
+# train_set, test_set = featuresets[500:], featuresets[:500]
+# classifier2 = nltk.maxent.train_maxent_classifier_with_scipy(train_toks = train_set, algorithm = "LBFGSB")
+# # classifier = nltk.NaiveBayesClassifier.train(train_set)
+# print classifier2.classify(gender_features2('xubo'))
+# # print classifier.show_most_informative_features(10)
 
-import nltk.data
-import os
-sent_detector = nltk.data.load('tokenizers/punkt/english.pickle')
-ARTICLE_MENU = "D:\\xubo\\ENwiki\\data3\\"
-NEW_ARTICLE_MENU = "D:\\xubo\\ENwiki\\newdata3\\"
-ARTICLE_ID_PATH = "D:\\xubo\\ENwiki\\article_id3"
-if not os.path.exists(NEW_ARTICLE_MENU):
-    os.makedirs(NEW_ARTICLE_MENU)
-article_id_file = open(ARTICLE_ID_PATH, 'w')
-article_list = os.listdir(ARTICLE_MENU)
-count = 0
-for article in article_list:
-    count += 1
-    if count%1000 == 0:
-        print count
-    article_file = open(ARTICLE_MENU + article, 'r')
-    entity = article_file.readline().rstrip()
-    print entity
-#     for line in article_file.readlines():
-#         print line
-#         break
-    article_content = article_file.read()
-#     article_content = "".join(article_file.readlines())
-#     print article_content[0:1000]
-    article_sentences = sent_detector.tokenize(article_content.strip())
-    article_sentence_num = len(article_sentences)
-    if article_sentence_num > 1:
-        article_sentence_file = open(NEW_ARTICLE_MENU + article, 'w')
-        for i in range(0,article_sentence_num):
-            article_sentence_file.write(article_sentences[i] + "\n")
-        article_sentence_file.close()
-        article_id_file.write("%s\t%s\n" %(entity, article))
-article_id_file.close()
+# from nltk.corpus import movie_reviews
+# import nltk
+# all_words = nltk.FreqDist(w.lower() for w in movie_reviews.words())
+# for word in all_words[0:2000]:
+#     print word,all_words.freq(word)
+
+# 
+# import nltk
+# 
+# 
+#      
+# train = [
+# (dict(a=1,b=1,c=1), 'y'),
+# (dict(a=1,b=1,c=1), 'x'),
+# (dict(a=1,b=1,c=0), 'y'),
+# (dict(a=0,b=1,c=1), 'x'),
+# (dict(a=0,b=1,c=1), 'y'),
+# (dict(a=0,b=0,c=1), 'y'),
+# (dict(a=0,b=1,c=0), 'x'),
+# (dict(a=0,b=0,c=0), 'x'),
+# (dict(a=0,b=1,c=1), 'y'),
+# ]
+# 
+# test = [
+# (dict(a=1,b=0,c=1)), # unseen
+# (dict(a=1,b=0,c=0)), # unseen
+# (dict(a=0,b=1,c=1)), # seen 3 times, labels=y,y,x
+# (dict(a=0,b=1,c=0)), # seen 1 time, label=x
+# ]
+# 
+# algorithm = nltk.classify.MaxentClassifier.ALGORITHMS[0]
+# print algorithm
+# classifier = nltk.MaxentClassifier.train(train, "GIS")
+# print classifier.batch_classify(test)
+# def test_maxent(algorithms):
+#     classifiers = {}
+#     for algorithm in nltk.classify.MaxentClassifier.ALGORITHMS:
+#         if algorithm.lower() == 'megam':
+#             try: nltk.classify.megam.config_megam()
+#             except: raise #continue
+#             try:
+#                 classifiers[algorithm] = nltk.MaxentClassifier.train(train, algorithm, trace=0, max_iter=1000)
+#             except Exception, e:
+#                 classifiers[algorithm] = e
+#                 print ' '*11+''.join(['      test[%s]  ' % i
+#                                       for i in range(len(test))])
+#                 print ' '*11+'     p(x)  p(y)'*len(test)
+#                 print '-'*(11+15*len(test))
+#                 for algorithm, classifier in classifiers.items():
+#                     print '%11s' % algorithm,
+#                     if isinstance(classifier, Exception):
+#                         print 'Error: %r' % classifier; continue
+#                         for featureset in test:
+#                             pdist = classifier.prob_classify(featureset)
+#                             print '%8.2f%6.2f' % (pdist.prob('x'), pdist.prob('y')),
+#                             print
+# test_maxent(nltk.classify.MaxentClassifier.ALGORITHMS)
+# import random
+# p = ["Python", "is", "powerful", "simple", "and so on..."]  
+# random.shuffle(p)  
+# print p
+# import nltk
+# aaa = "aaa bbb cdd sss sss aaa bbb"
+# all_words = nltk.FreqDist(w for w in aaa.split(" "))
+# print all_words
+# word_features = all_words.keys()[:2000]
+# print word_features
+# import nltk
+# from nltk.corpus import stopwords
+# import string
+# 
+# aaa = "i am a big boy, in a big city"
+# 
+# 
+# stop = stopwords.words("english")
+# # print stop
+# # bbb = set(token for token in nltk.word_tokenize(aaa) if token not in stop and token not in string.punctuation)
+# # print bbb
+# tokens = [token for token in nltk.word_tokenize(aaa) if token not in stop and token not in string.punctuation]
+# print "i" in tokens
+# pos = nltk.pos_tag(tokens)
+# print tokens
+# print [i[1] for i in pos]
+# all_words = nltk.FreqDist(tokens)
+# all_pos = nltk.FreqDist(pos)
+# 
+# print all_words
+# print all_pos
+# 
+# for k,v in all_words.iteritems():
+#     print k, v
+
+
+
+import nltk
+import pickle
+train = [
+(dict(a=1,b=1,c=1), 'y'),
+(dict(a=1,b=1,c=1), 'x'),
+(dict(a=1,b=1,c=0), 'y'),
+(dict(a=0,b=1,c=1), 'x'),
+(dict(a=0,b=1,c=1), 'y'),
+(dict(a=0,b=0,c=1), 'y'),
+(dict(a=0,b=1,c=0), 'x'),
+(dict(a=0,b=0,c=0), 'x'),
+(dict(a=0,b=1,c=1), 'y'),
+]
+ 
+test = [
+(dict(a=1,b=0,c=1)), # unseen
+(dict(a=1,b=0,c=0)), # unseen
+(dict(a=0,b=1,c=1)), # seen 3 times, labels=y,y,x
+(dict(a=0,b=1,c=0)), # seen 1 time, label=x
+]
+
+
+def save_classifier(classifier):
+    f = open('my_classifier.pickle', 'wb')
+    pickle.dump(classifier, f)
+    f.close()
+
+
+def load_classifier():
+    f = open('my_classifier.pickle', 'rb')
+    classifier = pickle.load(f)
+    f.close
+    return classifier
+
+classifier = nltk.MaxentClassifier.train(train, "GIS")
+save_classifier(classifier)
+classifier2 = load_classifier()
+for data in test:
+    result = classifier2.classify(data)
+    print data, result
+# print classifier.batch_classify(test)
+# print classifier2.batch_classify(test)

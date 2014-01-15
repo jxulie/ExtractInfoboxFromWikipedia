@@ -9,7 +9,7 @@ Created on 2013年12月16日
 @summary: sample category from category file
 
 '''
-sample_category_file = open("D://xubo//ENwiki//sample_category_final.txt", 'w')
+sample_category_file = open("D://xubo//ENwiki//sample_category_produced.txt", 'w')
 category_file = open("D://xubo//ENwiki//category_final.txt", 'r')
 category_lines = category_file.readlines()
 for line in category_lines:
@@ -18,7 +18,7 @@ for line in category_lines:
         words = line.split("\t")
         entity = words[0]
         category = words[1]
-        if category == "american films":
+        if "songs produced by" in category:
             sample_category_file.write("%s\t%s\n" %(entity, category))
     except:
         print line

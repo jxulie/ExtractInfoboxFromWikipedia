@@ -123,19 +123,19 @@ class SchemaRefiner(object):
                     if words[0] not in self.entity_categroy_dict:
                         self.entity_categroy_dict[words[0]] = set()
                     self.entity_categroy_dict[words[0]].add(words[1])
-            except IOError:
+            except:
                 print ecline
         ecfile.close()
 
     def count_category_attribute_pair(self):
         '''Count all the(category,attribute) pairs'''
         self.all_category_attribute_dict = dict()
-        print "entity_categroy_dict number is :", \
-                        str(len(self.entity_categroy_dict))
-        round_count = 0
+#         print "entity_categroy_dict number is :", \
+#                         str(len(self.entity_categroy_dict))
+#         round_count = 0
         for k, vvvv in self.entity_categroy_dict.iteritems():
-            round_count += 1
-            print str(round_count)
+#             round_count += 1
+#             print str(round_count)
             for caset in vvvv:
                 for atset in self.entity_attribute_dict[k]:
                     if (caset, atset) not in self.all_category_attribute_dict:
@@ -153,7 +153,7 @@ class SchemaRefiner(object):
 #             print len(self.category_entity_dict[k[0]])
 
             attribute_ratio = vvvv/len(self.category_entity_dict[k[0]])
-            if attribute_ratio > threshold:
+            if attribute_ratio > threshold and vvvv > 10:
 #                 print k,str(attribute_ratio)
                 self.category_attribute_dict[k] = attribute_ratio
     def write_category_attribute_pair(self, schema_path):
@@ -167,9 +167,9 @@ class SchemaRefiner(object):
 
 if __name__ == "__main__":
     MENU_PATH = "D://xubo//ENwiki//"
-    INFOBOX_PATH = MENU_PATH + "sample_infobox_final.txt"
-    CATEGORY_PATH = MENU_PATH + "sample_category_final.txt"
-    SCHEMA_PATH = MENU_PATH + "wiki_schema_refinered.txt"
+    INFOBOX_PATH = MENU_PATH + "sample_infobox_split_produced.txt"
+    CATEGORY_PATH = MENU_PATH + "sample_category_produced.txt"
+    SCHEMA_PATH = MENU_PATH + "sample_schema_produced.txt"
     THRESHOLD = 0.3
     TEST = SchemaRefiner(INFOBOX_PATH, \
                          CATEGORY_PATH, THRESHOLD, SCHEMA_PATH)

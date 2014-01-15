@@ -1,83 +1,12 @@
 #-*- coding:UTF-8 -*-
 '''
-Created on 2013年12月4日
+Created on 2014年1月13日
 
 @author: Bo Xu <mailto:bolang1988@gmail.com>
 
 @version: 1.0
 
-@summary: Construct (category, attribute, value, sentence) training data
-
-@version: 2.0
-
-@summary: 从处理中文变成处理英文，增加article_id文件，即英文实体与ID的对应关系
-                          主要是因为英文实体中存在冒号等不能作为文件名
-
-
-input:
-
-    schema entity value: (category, attribute, entity, value) split with "\t"
-                        different schema(category, attribute) in different files
-
-    article text:   text in Baidu Baike. split to sentences. each each a file
-
-output:
-
-    schema value sentence: (category, attribute, value, sentence)
-                            split with "\t"
-                        different schema(category, attribute) in different files
-e.g.:
-
-    schema entity value file
-
-              歌手_经纪公司.txt
-                 陈紫函    华谊兄弟传媒集团
-                娄译心    索卡尼娱乐
-                妮琪·米娜    YoungMoney/CashMoney/环球
-                川澄绫子    大泽事务所
-                范玮琪    百娱传媒股份有限公司
-                胡蓓蔚    “永星”唱片公司
-                超新星_(韩国组合)    CoreContentsMedia
-                易灵汐    巧思传媒文化公司
-                黄铠晴    东亚娱乐
-                朴灿烈    SMEntertainment
-                梁咏琪    美亚娱乐资讯集团有限公司
-                雷·查尔斯    AtlanticRecords
-                艾莉莎    喜乐音乐文化传媒（北京）公司
-                练正华    成都歌舞剧院
-                郑华娟    滚石唱片有限公司
-                言承旭    戏梦堂娱乐经纪有限公司
-    --end--
-
-    article text
-            陈紫函.txt
-
-            籍贯陈紫函(6张)：重庆[1-3]
-            中学：重庆南开中学
-            大学：北京电影学院表演系
-            家庭成员：父母、本人
-            粉丝昵称：紫菜
-            语言：中文、粤语、英语
-            方言：重庆话
-            特长：舞蹈、绘画、设计、单眼转
-            爱好：阅读、旅行、保龄球
-            宗教信仰陈紫函签名照(5张)：基督教
-            宠物：卡卡、宝宝（雪纳瑞犬）、卢比（泰迪）
-            最喜欢的水果：山竹
-            最喜欢的糖果：巧克力
-            最喜欢的食物：辣椒
-            电视剧剧照(35张)最喜欢的颜色：蓝色、紫色
-            最喜欢的衣着：休闲
-            最喜欢的电影：《魂断蓝桥》
-            最喜欢的男演员：反町隆史
-            最喜欢的女演员：张曼玉
-    --end--
-
-    schema value sentence
-
-            歌手_经纪公司.txt(different menu)
-            华谊兄弟传媒集团    经纪公司是华谊兄弟传媒集团
-    --end--
+@summary: 
 
 '''
 
@@ -147,7 +76,8 @@ class SchemaValueSentence(object):
 #                         print words[1]
                         best_sentence = self.find_best_sentence(words[1], article_lines)
                         if len(best_sentence) > 0:
-                                match_file.write("%s\t%s\n" %(words[1], best_sentence[0]))
+                            for each_sentence in best_sentence:
+                                match_file.write("%s\t%s\n" %(words[1], each_sentence))
 #                         self.write_match_sentence(schema, \
 #                                                  words[1], \
 #                                                  article_lines, \
@@ -169,6 +99,7 @@ class SchemaValueSentence(object):
         best_sentence = list()
         for line in lines:
 #             print line
+            line = line.lower()
             if line.startswith("|") == False:
                 line = line.rstrip()
                 if any(token in line for token in tokens):
@@ -205,8 +136,8 @@ if __name__ == "__main__":
 #     SCHEMA_ENTITY_VALUE_MENU = MENU_PATH + "trainset1//"
 #     SCHEMA_VALUE_SENTENCE_MENU = MENU_PATH + "trainset22//"
     MENU_PATH = "D://xubo//ENwiki//sample//"
-    SCHEMA_ENTITY_VALUE_MENU = MENU_PATH + "newtrainset1//"
-    SCHEMA_VALUE_SENTENCE_MENU = MENU_PATH + "newtrainset2//"
+    SCHEMA_ENTITY_VALUE_MENU = MENU_PATH + "newtrainset11//"
+    SCHEMA_VALUE_SENTENCE_MENU = MENU_PATH + "newtrainset22//"
     
     MENU_PATH2 = "D://xubo//ENwiki//"
     ARTICLE_ID_PATH = MENU_PATH2 + "article_id"

@@ -99,7 +99,6 @@ class SchemaEntityValue(object):
         infobox_file = open(infobox_path,'r')
         infobox_lines = infobox_file.readlines()
         for line in infobox_lines:
-
             try:
                 line = line.rstrip()
                 words = line.split("\t")
@@ -161,7 +160,7 @@ class SchemaEntityValue(object):
 
 if __name__ == "__main__":
     MENU_PATH = "D://xubo//ENwiki//"
-    INFOBOX_PATH = MENU_PATH + "sample_infobox_final.txt"
+    INFOBOX_PATH = MENU_PATH + "sample_infobox_final3.txt"
     CATEGORY_PATH = MENU_PATH + "sample_category_final.txt"
     SCHEMA_PATH = MENU_PATH + "wiki_schema_refinered.txt"
     SCHEMA_ENTITY_VALUE_MENU = MENU_PATH + "trainset1\\"
