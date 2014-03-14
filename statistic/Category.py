@@ -10,7 +10,8 @@ Created on 2013年12月25日
 
 '''
 import nltk
-category_file = open("D://xubo//ENwiki//category_final.txt", 'r')
+menu_path = "D:\\xubo\\dbpedia\\"
+category_file = open(menu_path + "raw_category.txt", 'r')
 category_lines = category_file.readlines()
 category_list = list()
 for line in category_lines:
@@ -21,7 +22,7 @@ for line in category_lines:
         print "error : ", line
 category_info = nltk.FreqDist(category_list) 
 # print category_info
-category_info_file = open("D://xubo//ENwiki//category_final_info.txt", 'w')
+category_info_file = open(menu_path + "statistic_raw_category.txt", 'w')
 for k,v in category_info.iteritems():
     category_info_file.write("%s\t%s\n" %(k, v))
 category_info_file.close()

@@ -39,8 +39,10 @@ for c in ccc:
 
 '''
 import re
-refile = open("D://xubo//ENwiki//sample_infobox_split_produced.txt", 'w')
-infofile = open("D://xubo//ENwiki//sample_infobox_produced.txt", 'r')
+# refile = open("D://xubo//ENwiki//sample_infobox_split_produced.txt", 'w')
+# infofile = open("D://xubo//ENwiki//sample_infobox_produced.txt", 'r')
+refile = open("D://xubo//ENwiki//origin//new_infobox_split.txt", 'w')
+infofile = open("D://xubo//ENwiki//origin//new_infobox.txt", 'r')
 infolines = infofile.readlines()
 for line in infolines:
     try:

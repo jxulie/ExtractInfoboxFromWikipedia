@@ -166,10 +166,14 @@ class SchemaRefiner(object):
         cafile.close()
 
 if __name__ == "__main__":
-    MENU_PATH = "D://xubo//ENwiki//"
-    INFOBOX_PATH = MENU_PATH + "sample_infobox_split_produced.txt"
-    CATEGORY_PATH = MENU_PATH + "sample_category_produced.txt"
-    SCHEMA_PATH = MENU_PATH + "sample_schema_produced.txt"
+#     MENU_PATH = "D://xubo//ENwiki//"
+#     INFOBOX_PATH = MENU_PATH + "sample_infobox_split_produced.txt"
+#     CATEGORY_PATH = MENU_PATH + "sample_category_produced.txt"
+#     SCHEMA_PATH = MENU_PATH + "sample_schema_produced.txt"
+    MENU_PATH = "D://xubo//ENwiki//origin//"
+    INFOBOX_PATH = MENU_PATH + "all_infobox.txt"
+    CATEGORY_PATH = MENU_PATH + "all_category.txt"
+    SCHEMA_PATH = MENU_PATH + "all_schema.txt"
     THRESHOLD = 0.3
     TEST = SchemaRefiner(INFOBOX_PATH, \
                          CATEGORY_PATH, THRESHOLD, SCHEMA_PATH)

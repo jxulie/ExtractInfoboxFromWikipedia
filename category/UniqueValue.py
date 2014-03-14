@@ -14,11 +14,15 @@ import math
 import operator
 from collections import Counter
 
-menu_path = "D://xubo//ENwiki//sample//"
-entity_category_path = menu_path + "sample_category_produced.txt"
-entity_infobox_path = menu_path + "sample_infobox_split_produced.txt"
-category_attribute_path = menu_path + "sample_schema_produced.txt"
-category_entropy_path = menu_path + "sample_entropy_produced.txt"
+menu_path = "D://xubo//ENwiki//origin//"
+entity_category_path = menu_path + "all_category.txt"
+entity_infobox_path = menu_path + "all_infobox.txt"
+category_attribute_path = menu_path + "all_schema.txt"
+category_entropy_path = menu_path + "all_entropy.txt"
+# MENU_PATH = "D://xubo//ENwiki//origin//"
+# INFOBOX_PATH = MENU_PATH + "all_infobox.txt"
+# CATEGORY_PATH = MENU_PATH + "all_category.txt"
+# SCHEMA_PATH = MENU_PATH + "all_schema.txt"
 # entity_category_path = menu_path + "category_final.txt"
 # entity_infobox_path = menu_path + "refine_infobox.txt"
 # category_attribute_path = menu_path + "schema_refinered.txt"
@@ -45,6 +49,7 @@ def have_unique_value(valuelist):
         clist = [k[0] for k in c]
     #     print clist
         result = clist[0]
+        common_num += 1
         for i in range(1,len(valuelist)):
             if result in valuelist[i]:
                 common_num += 1

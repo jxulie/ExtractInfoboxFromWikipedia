@@ -14,6 +14,7 @@ MENU_PATH = "D://xubo//ENwiki//sample//"
 INFOBOX_PATH = MENU_PATH + "sample_infobox_split_produced.txt"
 produce_path = MENU_PATH + "produce_infobox.txt"
 
+
 infobox_file = open(INFOBOX_PATH, 'r')
 infobox_lines = infobox_file.readlines()
 produce_file = open(produce_path, 'w')
